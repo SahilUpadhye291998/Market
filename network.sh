@@ -133,7 +133,7 @@ function networkUp(){
     if [ "${CERTIFICATE_AUTHORITIES}" == "true" ]; then
       export BYFN_CA1_PRIVATE_KEY=$(cd crypto-config/peerOrganizations/org1.example.com/ca && ls *_sk)
       export BYFN_CA2_PRIVATE_KEY=$(cd crypto-config/peerOrganizations/org2.example.com/ca && ls *_sk)
-      docker-compose -f docker-compose-couch.yaml -f docker-compose-leave-management.yaml -f docker-compose-e2e.yaml up -d ## -f docker-compose-ca.yaml
+      docker-compose -f docker-compose-couch.yaml -f docker-compose-market.yaml -f docker-compose-e2e.yaml up -d ## -f docker-compose-ca.yaml
       docker ps
       echo "==================================================================="
       echo "==================================================================="
@@ -143,12 +143,10 @@ function networkUp(){
       echo "==================================================================="
       echo "==================================================================="
       sleep 5
-      docker exec cli /bin/sh -c "scripts/network_manager.sh"
-      docker exec cli /bin/sh -c "scripts/network_QA.sh"
-      docker exec cli /bin/sh -c "scripts/network_reporter.sh"
-      docker exec cli /bin/sh -c "scripts/network_assignee.sh"
+      docker exec cli /bin/sh -c "scripts/network_buyer.sh"
+      docker exec cli /bin/sh -c "scripts/network_seller.sh"
       sleep 5
-      docker exec cli /bin/sh -c "scripts/testCode_bugtracking.sh"
+      docker exec cli /bin/sh -c "scripts/testCode_market.sh"
 
     else
       echo "Some config error has occured please check it once"
