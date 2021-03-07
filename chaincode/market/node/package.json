@@ -1,0 +1,19 @@
+{
+    "name": "market",
+    "version": "1.0.0",
+    "description": "Chaincode for market",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "engines": {
+        "node": ">=8.4.0",
+        "npm": ">=5.3.0"
+    },
+    "author": "xGod666",
+    "license": "ISC",
+    "dependencies": {
+        "fabric-shim": "^2.2.0",
+        "uuid": "^8.3.2"
+    }
+}
