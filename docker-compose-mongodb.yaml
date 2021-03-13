@@ -1,0 +1,10 @@
+version: "2"
+services:
+  mongodb_container:
+    container_name: mongodb
+    image: bitnami/mongodb:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - 27017:27017

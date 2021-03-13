@@ -71,10 +71,10 @@ function generateGenesis(){
 function generateChannel(){
   echo
   echo "###############################################################################"
-  echo "### Generating channel configuration transaction 'bugtrackingchannel.tx' ###"
+  echo "### Generating channel configuration transaction 'marketchannel.tx' ###"
   echo "###############################################################################"
   set -x
-  configtxgen -profile AllChannel -outputCreateChannelTx ./channel-artifacts/bugtrackingchannel.tx -channelID $CHANNEL_NAME
+  configtxgen -profile AllChannel -outputCreateChannelTx ./channel-artifacts/marketchannel.tx -channelID $CHANNEL_NAME
   res=$?
   set +x
   if [ $res -ne 0 ]; then
@@ -133,7 +133,7 @@ function networkUp(){
     if [ "${CERTIFICATE_AUTHORITIES}" == "true" ]; then
       export BYFN_CA1_PRIVATE_KEY=$(cd crypto-config/peerOrganizations/org1.example.com/ca && ls *_sk)
       export BYFN_CA2_PRIVATE_KEY=$(cd crypto-config/peerOrganizations/org2.example.com/ca && ls *_sk)
-      docker-compose -f docker-compose-couch.yaml -f docker-compose-market.yaml -f docker-compose-e2e.yaml up -d ## -f docker-compose-ca.yaml
+      docker-compose -f docker-compose-couch.yaml -f docker-compose-market.yaml -f docker-compose-e2e.yaml -f docker-compose-mongodb.yaml up -d ## -f docker-compose-ca.yaml
       docker ps
       echo "==================================================================="
       echo "==================================================================="
@@ -205,7 +205,7 @@ CLI_DELAY=30
 SYS_CHANNEL="bug-tracking-channel"
 export SYS_CHANNEL="bug-tracking-channel"
 CERTIFICATE_AUTHORITIES=true
-CHANNEL_NAME="bugtrackingchannel"
+CHANNEL_NAME="marketchannel"
 LANGUAGE=javascript
 CRYPTO="cryptogen"
 export VERBOSE=true
