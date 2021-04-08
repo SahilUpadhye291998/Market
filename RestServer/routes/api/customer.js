@@ -93,7 +93,7 @@ router.post('/addProductToCheckout', (req, res) => {
     const productDesc = req.body.productDesc;
     const productType = req.body.productType;
     const productPrice = req.body.productPrice;
-    const productQuantity = req.body.productQuantity;
+    const productQuantity = req.body.productQuantity.toString();
 
     console.log(req.body)
 

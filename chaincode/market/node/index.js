@@ -214,10 +214,47 @@ let ChainCode = class {
             "productDesc": args[2],
             "productType": args[3],
             "productPrice": args[4],
-            "productQuantity": args[5],
+            "productQuantity": 0,
         }
+
+        customer.cart.push(product);
+
+        let cart = [];
+
+        if (customer.cart.length == 0) {
+            cart.push(product);
+        } else {
+            const map = new Map();
+            for (const item of customer.cart) {
+                if (!map.has(item.productname)) {
+                    map.set(item.productname, true);    // set any value to Map
+                    cart.push({
+                        productname: item.productname,
+                        productDesc: item.productDesc,
+                        productType: item.productType,
+                        productPrice: item.productPrice,
+                        productQuantity: item.productQuantity,
+                    });
+                }
+            }
+        }
+
+        console.log(cart)
+
+        cart = cart.map((data) => {
+            if (data.productname === args[1]) {
+                let temp = parseInt(data.productQuantity)
+                let input = parseInt(args[5])
+                data.productQuantity = input + temp;
+                console.log(`temp: ${temp}`);
+                console.log(`data Product: ${data.productQuantity}`);
+
+            }
+            return data;
+        })
+
         try {
-            customer.cart.push(product);
+            customer.cart = cart;
         } catch (error) {
             throw new Error(`${error}`);
         }
