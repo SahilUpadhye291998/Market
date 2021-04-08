@@ -12,6 +12,8 @@ async function registerSupplier(secretSupplierName, companyOrg) {
         const walletPath = path.join(process.cwd(), "wallet");
         const wallet = new FileSystemWallet(walletPath);
         console.log(`Wallet path: ${walletPath}`);
+        console.log(secretSupplierName)
+        console.log(companyOrg)
 
         const userExists = await wallet.exists(secretSupplierName);
         if (userExists) {
@@ -33,7 +35,7 @@ async function registerSupplier(secretSupplierName, companyOrg) {
         await gateway.connect(ccpPath, {
             wallet,
             identity: "adminOrg2", //TODO: check if we can change this
-            discovery: { enabled: true, asLocalhost: true },
+            discovery: { enabled: true, asLocalhost: false },
         });
         const ca = gateway.getClient().getCertificateAuthority();
         const adminIdentity = gateway.getCurrentIdentity();
@@ -80,6 +82,8 @@ async function initSupplier(
         const walletPath = path.join(process.cwd(), "wallet");
         const wallet = new FileSystemWallet(walletPath);
         console.log(walletPath);
+        console.log(secretUserName);
+        console.log(name);
 
         const userExists = await wallet.exists(secretUserName);
         if (!userExists) {
@@ -136,7 +140,7 @@ async function addProductToSupplier(
         const walletPath = path.join(process.cwd(), "wallet");
         const wallet = new FileSystemWallet(walletPath);
         console.log(walletPath);
-
+        console.log(supplierEmail)
         const userExists = await wallet.exists(secretUserName);
         if (!userExists) {
             console.log("Please check this user does not exists");
@@ -213,8 +217,10 @@ async function readSupplier(secretUserName, supplierEmail) {
             "readSupplier",
             supplierEmail
         );
+        console.log();
         return JSON.parse(result.toString());
     } catch (error) {
+        console.log(error)
         console.log("Some error has occured please contact web Master");
     }
 }

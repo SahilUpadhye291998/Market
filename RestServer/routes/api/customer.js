@@ -39,7 +39,7 @@ router.post('/addProductToCart', (req, res) => {
     console.log("OK Add product is called");
     const secretUserName = req.body.secretUserName;
     const customerEmail = req.body.customerEmail;
-    const productName = req.body.productName;
+    const productName = req.body.productname;
     const productDesc = req.body.productDesc;
     const productType = req.body.productType;
     const productPrice = req.body.productPrice;
@@ -63,7 +63,7 @@ router.post('/addProductToWishList', (req, res) => {
     console.log("OK Add Product to the wishlist");
     const secretUserName = req.body.secretUserName;
     const customerEmail = req.body.customerEmail;
-    const productName = req.body.productName;
+    const productName = req.body.productname;
     const productDesc = req.body.productDesc;
     const productType = req.body.productType;
     const productPrice = req.body.productPrice;
@@ -73,6 +73,7 @@ router.post('/addProductToWishList', (req, res) => {
         .then((result) => { return res.status(200).json({ status: 200, result: result }) })
         .catch(error => { return res.status(500).json({ status: 500, result: error }) });
 });
+
 router.post('/readProductWishList', (req, res) => {
     console.log("OK Read Product to the wish list");
 
@@ -88,16 +89,19 @@ router.post('/addProductToCheckout', (req, res) => {
     console.log("OK add product to checkout");
     const secretUserName = req.body.secretUserName;
     const customerEmail = req.body.customerEmail;
-    const productName = req.body.productName;
+    const productName = req.body.productname;
     const productDesc = req.body.productDesc;
     const productType = req.body.productType;
     const productPrice = req.body.productPrice;
     const productQuantity = req.body.productQuantity;
 
+    console.log(req.body)
+
     customer.addProductToCheckout(secretUserName, customerEmail, productName, productDesc, productType, productPrice, productQuantity)
         .then((result) => { return res.status(200).json({ status: 200, result: result }) })
         .catch(error => { return res.status(500).json({ status: 500, result: error }) });
 });
+
 router.post('/readProductCheckOut', (req, res) => {
     console.log("OK read product from checkout");
     const secretUserName = req.body.secretUserName;
@@ -107,4 +111,15 @@ router.post('/readProductCheckOut', (req, res) => {
         .then((result) => { return res.status(200).json({ status: 200, result: result }) })
         .catch(error => { return res.status(500).json({ status: 500, result: error }) });
 });
+
+router.post('/readProductCheckOut', (req, res) => {
+    console.log("OK read product from checkout");
+    const secretUserName = req.body.secretUserName;
+    const email = req.body.email;
+
+    customer.readProductCheckOut(secretUserName, email)
+        .then((result) => { return res.status(200).json({ status: 200, result: result }) })
+        .catch(error => { return res.status(500).json({ status: 500, result: error }) });
+});
+
 module.exports = router;

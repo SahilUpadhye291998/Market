@@ -18,10 +18,12 @@ router.post('/signup', (req, res) => {
     const user = new User(userToBeCreated);
     user.save()
         .then((users) => {
+            console.log(users)
             return res.status(200).json({ code: 200, users: users, message: "user created successfully" });
         })
         .catch((error) => {
-            return res.status(500).send({ code: 500, users: users, message: "user not created successfully" });
+            console.log(error)
+            return res.status(500).send({ code: 500, users: error, message: "user not created successfully" });
         });
 });
 
@@ -31,6 +33,7 @@ router.post('/login', (req, res) => {
     const password = req.body.password;
     User.find({ email: email, password: password })
         .then((users) => {
+            console.log(users)
             return res.status(200).json({ code: 200, users: users });
         })
         .catch((error) => {

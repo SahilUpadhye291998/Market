@@ -247,10 +247,48 @@ let ChainCode = class {
             "productDesc": args[2],
             "productType": args[3],
             "productPrice": args[4],
-            "productQuantity": args[5],
+            "productQuantity": 0,
         }
+
+        customer.wishlist.push(product);
+
+        let wishlist = [];
+
+        if (customer.wishlist.length == 0) {
+            wishlist.push(product);
+        } else {
+            const map = new Map();
+            for (const item of customer.wishlist) {
+                if (!map.has(item.productname)) {
+                    map.set(item.productname, true);    // set any value to Map
+                    wishlist.push({
+                        productname: item.productname,
+                        productDesc: item.productDesc,
+                        productType: item.productType,
+                        productPrice: item.productPrice,
+                        productQuantity: item.productQuantity,
+                    });
+                }
+            }
+        }
+
+        console.log(wishlist)
+
+        wishlist = wishlist.map((data) => {
+            if (data.productname === args[1]) {
+                let temp = parseInt(data.productQuantity)
+                let input = parseInt(args[5])
+                data.productQuantity = input + temp;
+                console.log(`temp: ${temp}`);
+                console.log(`data Product: ${data.productQuantity}`);
+
+            }
+            return data;
+        })
+
         try {
-            customer.wishlist.push(product);
+            // customer.wishlist.push(product);
+            customer.wishlist = wishlist;
         } catch (error) {
             throw new Error(`${error}`);
         }
@@ -275,9 +313,19 @@ let ChainCode = class {
             throw new Error(JSON.stringify(jsonError));
         }
 
+        const product = {
+            "productname": args[1],
+            "productDesc": args[2],
+            "productType": args[3],
+            "productPrice": args[4],
+            "productQuantity": args[5],
+        }
+        const cart = customer.cart.filter(data => data.productname !== args[1])
+        console.log(`CART: ${cart}`);
+        console.log(`CUSTOMER: ${customer.checkout}`);
         try {
-            customer.checkOutProduct.push(customer.cart);
-            customer.cart = [];
+            customer.checkOutProduct.push(product);
+            customer.cart = cart;
         } catch (error) {
             throw new Error(`${error}`);
         }

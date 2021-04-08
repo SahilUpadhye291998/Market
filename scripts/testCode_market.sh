@@ -97,6 +97,22 @@ peer chaincode invoke -o orderer.example.com:7050 \
 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt \
 --peerAddresses peer0.org2.example.com:9051 \
 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt \
+-c '{"Args":["addProductToCartByCustomer","customer@gmail.com","product Name 1","product Desc 1","Type of product","12","21"]}'
+
+
+sleep 3
+echo "==============================================================="
+echo "                          Chaincode Test 6"
+echo "==============================================================="
+peer chaincode invoke -o orderer.example.com:7050 \
+--ordererTLSHostnameOverride orderer.example.com \
+--tls true \
+--cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem \
+--channelID marketchannel --name market \
+--peerAddresses peer0.org1.example.com:7051 \
+--tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt \
+--peerAddresses peer0.org2.example.com:9051 \
+--tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt \
 -c '{"Args":["addProductToCartByCustomer","customer@gmail.com","product Name","product Desc","Type of product","12","21"]}'
 
 sleep 3
@@ -127,7 +143,23 @@ peer chaincode invoke -o orderer.example.com:7050 \
 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt \
 --peerAddresses peer0.org2.example.com:9051 \
 --tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt \
--c '{"Args":["addProductToCheckoutByCustomer","customer@gmail.com"]}'
+-c '{"Args":["addProductToWishListByCustomer","customer@gmail.com","product Name","product Desc","Type of product","12","21"]}'
+
+
+sleep 3
+echo "==============================================================="
+echo "                          Chaincode Test 7"
+echo "==============================================================="
+peer chaincode invoke -o orderer.example.com:7050 \
+--ordererTLSHostnameOverride orderer.example.com \
+--tls true \
+--cafile /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem \
+--channelID marketchannel --name market \
+--peerAddresses peer0.org1.example.com:7051 \
+--tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt \
+--peerAddresses peer0.org2.example.com:9051 \
+--tlsRootCertFiles /opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt \
+-c '{"Args":["addProductToCheckoutByCustomer","customer@gmail.com","product Name","product Desc","Type of product","12","21"]}'
 
 sleep 3
 echo "==============================================================="

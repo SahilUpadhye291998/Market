@@ -251,6 +251,7 @@ async function addProductToCheckout(
         const walletPath = path.join(process.cwd(), "wallet");
         const wallet = new FileSystemWallet(walletPath);
         console.log(walletPath);
+        console.log(customerEmail);
 
         const userExists = await wallet.exists(secretUserName);
         if (!userExists) {

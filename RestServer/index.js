@@ -6,6 +6,7 @@ const connectionString = require("./secret/secret.js").connectionString;
 const admin = require("./routes/api/admin");
 const customer = require("./routes/api/customer");
 const supplier = require("./routes/api/supplier");
+const user = require("./routes/api/user");
 
 const app = express();
 process.setMaxListeners(0);
@@ -31,9 +32,10 @@ mongoose
     });
 
 app.use("/api/admin", admin);
-app.use("/api/customer ", customer);
 app.use("/api/supplier", supplier);
-const PORT = 3000 || process.env.PORT;
+app.use("/api/customer", customer);
+app.use("/api/user", user);
+const PORT = 5000 || process.env.PORT;
 //starting point of the server is placed here
 app.listen(PORT, () => {
     console.log(`Server started at port ${PORT}`);

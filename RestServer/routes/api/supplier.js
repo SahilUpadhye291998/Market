@@ -3,6 +3,7 @@ const router = express.Router();
 
 const supplier = require('../../methods/supplier');
 
+
 router.post('/register', (req, res) => {
 	console.log("OK Register is called");
 	const secretUserName = req.body.secretUserName;
@@ -20,7 +21,9 @@ router.post('/signup', (req, res) => {
 	const mobileNumber = req.body.mobileNumber;
 	const address = req.body.address;
 
-	supplier.initSupplier(secretUserName, email, name, mobileNumber, address)
+	console.log(req.body)
+
+	supplier.initSupplier(secretUserName, name, email, mobileNumber, address)
 		.then((result) => { return res.status(200).json({ status: 200, result: result }) })
 		.catch(error => { return res.status(500).json({ status: 500, result: error }) });
 });
@@ -29,6 +32,8 @@ router.post('/readSupplier', (req, res) => {
 	console.log("OK Supplier is called");
 	const secretUserName = req.body.secretUserName;
 	const email = req.body.email;
+
+	console.log(req.body)
 
 	supplier.readSupplier(secretUserName, email)
 		.then((result) => { return res.status(200).json({ status: 200, result: result }) })
@@ -44,6 +49,8 @@ router.post('/addProductBySupplier', (req, res) => {
 	const productType = req.body.productType;
 	const productPrice = req.body.productPrice;
 	const productQuantity = req.body.productQuantity;
+
+	console.log(req.body)
 
 	supplier.addProductToSupplier(secretUserName, supplierEmail, productName, productDesc, productType, productPrice, productQuantity)
 		.then((result) => { return res.status(200).json({ status: 200, result: result }) })
